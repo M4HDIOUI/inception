@@ -1,10 +1,16 @@
-FROM debain:11.7
+FROM debian:bullseye
 
-RUN apt update && apt upgade -y && apt install curl -y
-RUN apt install mariadb-client -y
+RUN apt-get update && apt-get upgrade -y      
 RUN apt-get install mariadb-server -y
+    # apt install curl -y                     \
+    # apt install mariadb-client -y           \
+
+COPY conf/50-server.cnf /etc/mysql/mariadb.conf.d/50-server.cnf
 
 COPY ./tools/*.sh .
-RUN chmod 777 ./*.sh
+
+RUN chmod 777 script.sh
 
 CMD ["./script.sh"]
+
+EXPOSE 443
