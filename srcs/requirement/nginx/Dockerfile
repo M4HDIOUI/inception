@@ -10,13 +10,10 @@ RUN  openssl req -x509 -nodes -out /etc/nginx/ssl/inception.crt -keyout /etc/ngi
 
 RUN mkdir -p /var/run/nginx
 
-COPY conf/nginx.conf /etc/nginx/nginx.conf
-
-# RUN chmod +x /usr/local/bin/auto_config.sh
+COPY conf/nginx.conf /etc/nginx/sites-enabled/default
 
 RUN chmod 755 /var/www/html
 
 RUN chown -R www-data:www-data /var/www/html 
 
-CMD [ "nginx", "-g", "daemon off;" ]
 CMD [ "nginx", "-g", "daemon off;" ]
